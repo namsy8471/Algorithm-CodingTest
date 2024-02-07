@@ -46,7 +46,7 @@ int solution(vector<int> priorities, int location) {
             
             q.pop();
             
-            while(v[i].second == 0) i++;
+            if(v[i].second == 0) i++;
             if(i >= v.size()) break;
         }
     }
