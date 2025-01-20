@@ -37,7 +37,7 @@ int main() {
     v.erase(last, v.end());
 
     for (auto& i : v)
-        cout << i << endl;
+        cout << i << '\n';
 
     return 0;
 }
