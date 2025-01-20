@@ -6,6 +6,8 @@ using namespace std;
 
 int main() {
     
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     vector<int> v;
 
     int cnt;
@@ -24,7 +26,7 @@ int main() {
     }
 
     sort(v.begin(), v.end());
-
+    
     for (auto i : v)
         cout << i << '\n';
 
