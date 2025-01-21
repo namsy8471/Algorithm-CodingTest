@@ -1,5 +1,5 @@
 #include <iostream>
-#include <set>
+#include <unordered_set>
 #include <vector>
 
 using namespace std;
@@ -7,27 +7,26 @@ using namespace std;
 int main() {
 
     int cnt;
-    set<int> s1;
+    unordered_set<int> s;
 
     cin >> cnt;
     for (int i = 0; i < cnt; i++) {
         int n;
         cin >> n;
-        s1.insert(n);
+        s.insert(n);
     }
 
     cin >> cnt;
-    vector<pair<int, bool>> v;
+    vector<bool> v(cnt);
 
     for (int i = 0; i < cnt; i++) {
         int n;
         cin >> n;
-        v.push_back(make_pair(n, false));
-        if (s1.find(n) != s1.end()) v[i].second = true;
+        v[i] = s.find(n) != s.end();
     }
 
-    for (const auto& i : v)
-        cout << i.second << ' ';
+    for (const auto& b : v)
+        cout << b << ' ';
     
     return 0;
 }
