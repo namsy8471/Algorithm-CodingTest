@@ -1,5 +1,5 @@
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <algorithm>
 
@@ -10,32 +10,24 @@ int main() {
     int cnt;
 
     cin >> cnt;
-    vector<int> v;
+    vector<int> v(cnt);
 
-    while (cnt > 0)
-    {
-        int i;
-        cin >> i;
-
-        v.push_back(i);
-
-        cnt--;
+    for (int i = 0; i < cnt; i++) {
+        cin >> v[i];
     }
 
     vector<int> copyV(v.begin(), v.end());
     sort(copyV.begin(), copyV.end());
+    copyV.erase(unique(copyV.begin(), copyV.end()), copyV.end());
 
-    map<int, int> m;
-
-    cnt = 0;
+    unordered_map<int, int> m;
 
     for (int i = 0; i < copyV.size(); i++)
-        if(m.find(copyV[i]) == m.end()) m[copyV[i]] = cnt++;
+        m[copyV[i]] = i;
 
-    for (int i = 0; i < v.size(); i++)
-        v[i] = m[v[i]];
+    for (auto& i : v) i = m[i];
 
-    for (auto& i : v)
+    for (const auto& i : v)
         cout << i << ' ';
 
 
