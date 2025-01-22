@@ -1,6 +1,7 @@
 #include <iostream>
-#include <set>
+#include <unordered_set>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -9,7 +10,7 @@ int main() {
     int n, m;
 
     cin >> n;
-    set<int> s;
+    unordered_set<int> s;
 
     for (int i = 0; i < n; i++) {
         int n;
