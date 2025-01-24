@@ -1,6 +1,5 @@
 #include <iostream>
 #include <unordered_set>
-#include <string>
 
 using namespace std;
 
@@ -13,32 +12,20 @@ int main() {
 
     cin >> n >> m;
 
-    unordered_set<int> s1;
-    unordered_set<int> s2;
+    unordered_set<int> s;
+    int same = 0;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n + m; i++)
     {
         int num;
         cin >> num;
-        s1.insert(num);
+        if (s.find(num) == s.end()) s.insert(num);
+        else same++;
     }
 
-    for (int i = 0; i < m; i++)
-    {
-        int num;
-        cin >> num;
-        s2.insert(num);
-    }
+    int ret = s.size() - same;
 
-    unordered_set<int> retS;
-
-    for (const auto& i : s1)
-        if (s2.find(i) == s2.end()) retS.insert(i);
-
-    for (const auto& i : s2)
-        if (s1.find(i) == s1.end()) retS.insert(i);
-
-    cout << retS.size() << endl;
+    cout << ret << endl;
 
     return 0;
 }
