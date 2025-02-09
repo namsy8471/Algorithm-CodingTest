@@ -2,20 +2,20 @@
 
 using namespace std;
 
-int getLCM(int a, int b)
+int getGCD(int a, int b)
 {
-	if (a > b) return b == 0 ? a : getLCM(b, (a % b));
-	else return a == 0 ? b : getLCM(a, b % a);
+	if (a > b) return b == 0 ? a : getGCD(b, (a % b));
+	else return a == 0 ? b : getGCD(a, b % a);
 }
 
 pair<int, int> getGCDAndLCM(int a, int b)
 {
 	int gcd, lcm;
 
-	lcm = getLCM(a, b);
-	gcd = a * b / lcm;
+	gcd = getGCD(a, b);
+	lcm = a * b / gcd;
 
-	return make_pair(lcm, gcd);
+	return make_pair(gcd, lcm);
 }
 
 int main()
