@@ -1,5 +1,4 @@
 #include <iostream>
-#include <map>
 #include <queue>
 
 using namespace std;
@@ -19,46 +18,40 @@ int main() {
 
         cin >> cnt >> pos;
 
-        queue<pair<int,int>> q;
-        map<int, int> m;
+        queue<pair<int, int>> q;
+        priority_queue<int> pq;
 
         for (int i = 0; i < cnt; i++)
         {
             int num;
             cin >> num;
 
-            q.push(make_pair(num, i));
-            m[num]++;
+            q.push({ num, i });
+            pq.push(num);
         }
 
-        int priority = 9;
         int order = 0;
 
         while (!q.empty())
         {
-            if (m[priority] == 0)
-            {
-                priority--;
-                continue;
-            }
+            auto [priority, idx] = q.front();
+            q.pop();
 
-            if (q.front().first == priority)
+            if (priority == pq.top())
             {
                 order++;
-                if (q.front().second == pos) break;
+                pq.pop();
 
-                q.pop();
-                m[priority]--;
+                if (idx == pos) { 
+                    cout << order << '\n';
+                    break; 
+                }
             }
 
-            else
-            {
-                q.push(q.front());
-                q.pop();
+            else{
+                q.push({priority, idx});
             }
         }
-        
-        cout << order << '\n';
     }
 
     return 0;
