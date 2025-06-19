@@ -1,6 +1,5 @@
 #include <iostream>  
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -15,14 +14,15 @@ int main() {
 
     vector<int> v(numOfTree, 0);
     
-    for (auto& iter : v)
-        cin >> iter;
-
-    sort(v.begin(), v.end());
-
     long long low = 0;
-    long long high = v.back();
-    
+    long long high = 0;
+
+    for (auto& iter : v)
+    {
+        cin >> iter;
+        if (iter > high) high = iter;
+    }
+
     long long sum = 0;
     int ret = 0;
 
