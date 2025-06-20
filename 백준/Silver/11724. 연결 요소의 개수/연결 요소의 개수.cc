@@ -1,22 +1,18 @@
-#include <iostream>  
-#include <queue>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-int DFS(int start,const vector<vector<int>>& v, vector<bool>& isVisited)
+void DFS(int start,const vector<vector<int>>& v, vector<bool>& isVisited)
 {
-    if (isVisited[start]) return 0;
-
     isVisited[start] = true;
 
-    for (int i = 1; i < v.size(); i++)
+    for (auto i : v[start])
     {
-        if (v[start][i] == 1 && !isVisited[i]) {
-            DFS(i, v, isVisited);
-        }
-    }
+        if (isVisited[i]) continue;
 
-    return 1;
+        DFS(i, v, isVisited);
+    }
 }
 
 int main() {
@@ -27,7 +23,7 @@ int main() {
     int num, cnt;
     cin >> num >> cnt;
 
-    vector<vector<int>> v(num + 1, vector<int>(num + 1, 0));
+    vector<vector<int>> v(num + 1);
     vector<bool> isVisited(num + 1, false);
 
     while (cnt--)
@@ -35,15 +31,18 @@ int main() {
         int n1, n2;
         cin >> n1 >> n2;
 
-        v[n1][n2] = 1;
-        v[n2][n1] = 1;
+        v[n1].push_back(n2);
+        v[n2].push_back(n1);
     }
 
     int ret = 0;
 
     for (int i = 1; i < num + 1; i++)
     {
-        ret += DFS(i, v, isVisited);
+        if (isVisited[i]) continue;
+        
+        DFS(i, v, isVisited);
+        ret++;
     }
 
     cout << ret;
